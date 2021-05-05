@@ -1,19 +1,15 @@
 <template>
-    <ul>
-        <learning-resource v-for="resource in storedResources" :key="resource.id"></learning-resource>
-        <!-- why create a separate component instead of markup here? -->
-        <!-- there is no hard rull for when a component is better -->
-        <!-- list items thru which you loop are a good candidate for smaller component -->
-    </ul>
+    <stored-resources
+    :resources="storedResources"
+    ></stored-resources>
 </template>
 
 <script>
-import LearningResource from './components/learning-resources/LearningResource.vue'
+// import LearningResource from './components/learning-resources/LearningResource.vue'
+import StoredResources from './components/learning-resources/StoredResources.vue'
 export default{
     components: {
-
-        LearningResource
-
+        StoredResources,
      },
     data(){
         return{
@@ -31,3 +27,16 @@ export default{
     }
 }
 </script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
     <base-dialogue v-if="inputisInvalid"
-    title="Invalid Input">
+    title="Invalid Input"
+    @close="confirmError">
     <template #default>
         <p>Your inputs are bad and you should feel bad</p>
         <p>Please enter real inputs</p>

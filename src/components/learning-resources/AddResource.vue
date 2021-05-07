@@ -1,6 +1,16 @@
 <template>
+    <base-dialogue v-if="inputisInvalid"
+    title="Invalid Input">
+    <template #default>
+        <p>Your inputs are bad and you should feel bad</p>
+        <p>Please enter real inputs</p>
+    </template>
+    <template #actions>
+        <base-button @click="confirmError">Okay</base-button>
+    </template>
+    </base-dialogue>
     <base-card>
-        <form>
+        <form @submit.prevent="submitData">
             <div class="form-control">
                 <label for="title">Title</label>
                 <input id="title" name="title" type="text" ref="titleInput">
@@ -14,21 +24,37 @@
                 <input id="link" name="link" type="url" ref="linkInput">
             </div>
             <div>
-                <base-button type="submit">Add Resource</base-button>
+                <base-button type="submit" @click="submitData">Add Resource</base-button>
             </div>
         </form>
     </base-card>
 </template>
 <script>
+import BaseDialogue from '../UI/BaseDialogue.vue';
 export default {
+  components: { BaseDialogue },
     inject: ['addResource'],
+    data(){
+        return {
+            inputisInvalid: false,
+        }
+    },
     methods:{
         submitData(){
             const enteredTitle = this.$refs.titleInput.value;
             const enteredDescription = this.$refs.descInput.value;
             const enteredLink = this.$refs.linkInput.value;
 
+            if(enteredTitle.trim()===''||
+            enteredDescription.trim()===''||
+            enteredLink.trim()===''){
+                this.inputisInvalid = true;
+                return;
+            }
             this.addResource(enteredTitle,enteredDescription,enteredLink)
+        },
+        confirmError(){
+            this.inputisInvalid = false;
         }
     }
 }

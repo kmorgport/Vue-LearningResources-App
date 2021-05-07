@@ -3,7 +3,7 @@
         <base-button @click="setSelectedTab('stored-resources')" 
         :mode="storedResButton">
         Stored Resources</base-button>
-        <base-button @click="setSelectedTab('add-resources')"
+        <base-button @click="setSelectedTab('add-resource')"
         :mode="addResButtonMode">
         Add Resources</base-button>
     </base-card>
@@ -53,7 +53,7 @@ export default{
         setSelectedTab(tab){
             this.selectedTab = tab;
         },
-        addResources(title, description, url){
+        addResource(title, description, url){
             const newResource = {
                 id: new Date().toISOString,
                 title : title,
